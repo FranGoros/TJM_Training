@@ -1,0 +1,378 @@
+/* 1) Variables globales */
+:root {
+    --black: #101010;
+    --black-soft: #171717;
+    --white: #f5f5f3;
+    --gray: #a5a5a5;
+    --gray-dark: #292929;
+    --border: rgba(255, 255, 255, 0.14);
+    --max-width: 1180px;
+}
+
+/* 2) Ajustes generales para que el tamaño sea previsible. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+    margin: 0;
+    background: var(--black);
+    color: var(--white);
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+a:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: "Barlow Condensed", Impact, sans-serif; }
+
+/* 3) Barra superior, marca y navegación. */
+.site-header {
+    width: 100%; min-height: 82px; padding: 18px max(5vw, calc((100vw - var(--max-width)) / 2));
+    display: flex; align-items: center; justify-content: space-between; gap: 28px;
+    border-bottom: 1px solid var(--border); background: rgba(16, 16, 16, 0.97);
+}
+.brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; }
+.brand-mark {
+    width: 40px; height: 40px; display: grid; place-items: center;
+    border: 1px solid var(--white); font-size: 12px; font-weight: 900; letter-spacing: -1px;
+    transform: skew(-7deg);
+}
+.brand-copy { display: flex; flex-direction: column; line-height: 1.35; }
+/* Imagen del logo */
+.brand-logo {
+    width: 50px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+.brand-copy strong { font-size: 12px; letter-spacing: 1.3px; }
+.brand-copy strong span { color: var(--gray); font-weight: 500; }
+.brand-copy small { margin-top: 3px; color: var(--gray); font-size: 8px; letter-spacing: 1.3px; }
+.main-nav { display: flex; align-items: center; gap: 30px; }
+.main-nav a { color: #fdfafa; font-size: 14px; transition: color .2s ease; }
+.main-nav a:hover, .text-link:hover { color: var(--white); }
+.header-cta { padding: 10px 16px; border: 1px solid var(--border); font-size: 12px; font-weight: 800; }
+.header-cta:hover { background: var(--white); color: var(--black); }
+
+/* 4) Estilo común de los botones. */
+.button {
+    min-height: 50px; padding: 13px 19px; display: inline-flex; align-items: center; justify-content: center;
+    gap: 22px; border: 1px solid transparent; font-size: 11px; font-weight: 800; letter-spacing: .45px;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.button:hover { transform: translateY(-2px); }
+.button-light { background: var(--white); color: var(--black); }
+.button-light:hover { background: #d9d9d7; }
+.button-outline { border-color: rgba(255,255,255,.35); color: var(--white); }
+.button-outline:hover { background: var(--white); color: var(--black); }
+
+/* 5) Portada / HERO. El clamp adapta el tamaño del título a la pantalla. */
+.hero {
+    position: relative; width: min(90%, var(--max-width)); min-height: 650px; margin: 0 auto;
+    padding: 90px 0 105px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 48px;
+}
+.hero-content { position: relative; z-index: 1; }
+.eyebrow { margin: 0 0 20px; display: flex; align-items: center; gap: 10px; color: var(--gray); font-size: 9px; font-weight: 800; letter-spacing: 2px; }
+.eyebrow-line { width: 25px; height: 1px; background: var(--white); }
+h1, h2 { margin-bottom: 20px; font-weight: 900; letter-spacing: -1px; line-height: .91; }
+h1 { font-size: clamp(52px, 6.5vw, 90px); }
+h1 span, h2 span { color: var(--gray); }
+.hero-description { max-width: 470px; margin-bottom: 30px; color: #bdbdbd; font-size: 14px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+.text-link { color: #c7c7c7; font-size: 10px; font-weight: 800; }
+.hero-note { margin-top: 52px; display: flex; align-items: center; gap: 10px; color: var(--gray); font-size: 8px; font-weight: 800; letter-spacing: 1.3px; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--white); }
+
+/* 6) Panel visual de la portada. Por ahora es una ilustración CSS sin foto.
+   Para agregar una imagen, fijate en los comentarios de index.html. */
+.hero-visual {
+    min-height: 440px; padding: 18px; position: relative; overflow: hidden;
+    background-image: linear-gradient(#0005, #0005), url("img/entrenamiento.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(255,255,255,.09);
+}
+.hero-visual::before, .hero-visual::after { content: ""; position: absolute; background: rgba(255,255,255,.09); transform: rotate(-32deg); }
+.hero-visual::before { width: 140%; height: 1px; left: -20%; top: 38%; }
+.hero-visual::after { width: 1px; height: 150%; left: 52%; top: -25%; }
+.visual-grid { position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.18); }
+.visual-grid::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 1px solid rgba(255,255,255,.08); }
+.visual-label { position: absolute; z-index: 1; color: #c5c5c5; font-size: 8px; font-weight: 800; letter-spacing: 1.6px; }
+.visual-label-top { top: 40px; left: 40px; }
+.visual-label-bottom { right: 38px; bottom: 40px; text-align: right; line-height: 1.6; }
+.visual-plus { position: absolute; z-index: 1; left: 50%; top: 50%; color: rgba(255,255,255,.7); font-size: 100px; font-weight: 200; line-height: 1; transform: translate(-50%, -50%); }
+.visual-side-label { position: absolute; z-index: 1; right: 4px; top: 50%; color: rgba(255,255,255,.3); font-size: 8px; letter-spacing: 3px; transform: rotate(90deg) translateX(50%); transform-origin: right top; }
+.scroll-cue { position: absolute; left: 0; bottom: 28px; display: flex; align-items: center; gap: 10px; color: var(--gray); font-size: 8px; font-weight: 800; letter-spacing: 1.5px; }
+.scroll-cue span { width: 24px; height: 1px; background: var(--gray); }
+
+/* 7) Franja con conceptos de entrenamiento. */
+.ticker { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 17px 20px; color: #d0d0d0; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: 2px; }
+.ticker span { padding: 0 18px; color: var(--gray); }
+
+/* 8) Ancho común y cabeceras de las secciones. */
+.section { width: min(90%, var(--max-width)); margin: 0 auto; padding: 108px 0; }
+.section-heading { margin-bottom: 42px; display: flex; align-items: flex-end; justify-content: space-between; gap: 35px; }
+.section-heading h2, .final-cta h2 { font-size: clamp(42px, 5vw, 66px); }
+.section-intro { max-width: 340px; margin-bottom: 5px; color: var(--gray); font-size: 13px; }
+
+/* 9) Tarjetas de las especialidades. */
+.training-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.training-card { min-height: 260px; position: relative; padding: 26px; border: 1px solid var(--border); background: linear-gradient(145deg, #1b1b1b, #111); transition: border-color .2s ease, transform .2s ease; }
+.training-card:hover { border-color: rgba(255,255,255,.55); transform: translateY(-3px); }
+.card-number { color: var(--gray); font-size: 9px; letter-spacing: 1px; }
+.card-symbol { margin: 23px 0 17px; display: block; color: #d4d4d4; font-size: 26px; }
+.training-card h3 { margin-bottom: 10px; font-size: 22px; letter-spacing: .6px; }
+.training-card p { margin-bottom: 0; color: var(--gray); font-size: 11px; }
+.training-card-wide { grid-column: span 2; min-height: 220px; }
+
+/* 9.5) FONDO DIFUMINADO — MÉTODO DE ENTRENAMIENTO. */  
+
+/* La sección sirve como contenedor del fondo */
+.training-section {
+    position: relative;
+    isolation: isolate;
+}
+
+/* Imagen desenfocada detrás del contenido */
+.training-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    /* Usamos la misma imagen que ya tenés en la carpeta img */
+    background-image: url("img/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Efecto de fondo que acompaña visualmente el desplazamiento */
+    background-attachment: fixed;
+
+    /* Difuminado y transparencia */
+    filter: blur(6px);
+    opacity: 0.35;
+
+    /* Agrandamos un poco la imagen para evitar bordes borrosos vacíos */
+    transform: scale();
+}
+.training-section::before,
+.training-section::after {
+    left: calc((100% - 100vw) / 2);
+    right: calc((100% - 100vw) / 2);
+}
+/* En celulares usamos desplazamiento normal para evitar problemas
+   de rendimiento con los fondos fijos */
+
+@media (max-width: 650px) {
+    .training-section::before {
+        background-attachment: scroll;
+        filter: blur(4px);
+        opacity: 0.25;
+    }
+}
+
+
+/* 10) Lista de horarios. */
+.schedule-section { border-top: 1px solid var(--border); }
+.schedule-list { border-top: 1px solid var(--border); }
+.schedule-row { min-height: 82px; padding: 18px 8px; display: grid; grid-template-columns: 1fr 1.4fr .5fr; align-items: center; gap: 20px; border-bottom: 1px solid var(--border); transition: padding .2s ease, background .2s ease; }
+.schedule-row:hover { padding-left: 17px; background: rgba(255,255,255,.025); }
+.schedule-day { font-size: 11px; font-weight: 900; letter-spacing: 1.5px; }
+.schedule-time { font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(19px, 2.2vw, 27px); font-weight: 700; }
+.schedule-duration { justify-self: end; color: var(--gray); font-size: 9px; letter-spacing: 1px; }
+.schedule-footnote, .price-note { margin: 18px 0 0; color: var(--gray); font-size: 10px; }
+
+/* 11) Tarjetas de precios. */
+.plans-section { border-top: 1px solid var(--border); }
+.plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.plan-card { position: relative; padding: 35px; border: 1px solid var(--border); background: #171717; }
+.plan-card-featured { background: #222; border-color: rgba(255,255,255,.42); }
+.plan-tag { position: absolute; top: 0; right: 0; padding: 8px 12px; background: var(--white); color: var(--black); font-size: 8px; font-weight: 900; letter-spacing: 1px; }
+.plan-label { margin-bottom: 12px; color: var(--gray); font-size: 9px; font-weight: 800; letter-spacing: 2px; }
+.plan-card h3 { margin-bottom: 10px; font-size: 25px; letter-spacing: .4px; }
+.plan-price { margin-bottom: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(44px, 4vw, 58px); font-weight: 800; letter-spacing: -1px; }
+.plan-price span { margin-right: 3px; color: var(--gray); font-size: .65em; }
+.plan-detail { margin-bottom: 24px; color: var(--gray); font-size: 11px; }
+.plan-card ul { min-height: 105px; margin: 0 0 28px; padding: 20px 0 0; border-top: 1px solid var(--border); list-style: none; }
+.plan-card li { position: relative; margin-bottom: 10px; padding-left: 18px; color: #d1d1d1; font-size: 11px; }
+.plan-card li::before { content: "—"; position: absolute; left: 0; color: var(--gray); }
+.plan-card .button { width: 100%; }
+
+/* 12) Último llamado a contactar. */
+.final-cta { padding: 95px 20px; border-top: 1px solid var(--border); background: radial-gradient(ellipse at center top, rgba(255,255,255,.08), transparent 55%), #171717; text-align: center; }
+.final-cta .eyebrow { justify-content: center; }
+.final-cta h2 { margin-bottom: 20px; }
+.final-cta > p:not(.eyebrow) { max-width: 470px; margin: 0 auto 28px; color: var(--gray); font-size: 13px; }
+
+/* 13) Pie de página. */
+.site-footer { width: min(90%, var(--max-width)); margin: 0 auto; padding: 30px 0; display: flex; align-items: center; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--border); }
+.site-footer > p { margin: 0; color: var(--gray); font-size: 9px; }
+.back-to-top { margin-left: auto; color: #d2d2d2; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+.copyright { width: 100%; padding-top: 15px; border-top: 1px solid var(--border); }
+
+/* 14) Ajustes para pantallas medianas, como tablets. */
+@media (max-width: 900px) {
+    .site-header { gap: 16px; }
+    .main-nav { gap: 16px; }
+    .hero { min-height: auto; padding-top: 75px; padding-bottom: 95px; gap: 28px; }
+    .hero-visual { min-height: 370px; }
+    .training-card { padding: 21px; }
+    .plan-card { padding: 27px; }
+}
+
+/* 15) Ajustes para celulares. */
+@media (max-width: 650px) {
+    html { scroll-padding-top: 20px; }
+    .site-header { min-height: 70px; padding: 14px 5%; flex-wrap: wrap; }
+    .brand-mark { width: 34px; height: 34px; }
+    .brand-copy strong { font-size: 10px; letter-spacing: .8px; }
+    .brand-copy small { font-size: 7px; }
+    .main-nav { order: 3; width: 100%; justify-content: space-around; padding-top: 10px; border-top: 1px solid var(--border); }
+    .main-nav a { font-size: 15px; }
+    .header-cta { padding: 8px 10px; font-size: 10px; }
+    .hero { width: 90%; padding-top: 62px; grid-template-columns: 1fr; gap: 34px; }
+    h1 { font-size: clamp(50px, 13vw, 73px); }
+    .hero-description { font-size: 13px; }
+    .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+    .hero-note { margin-top: 34px; }
+    .hero-visual { min-height: 350px; }
+    .scroll-cue { bottom: 27px; }
+    .ticker { font-size: 8px; line-height: 2.6; letter-spacing: 1px; }
+    .ticker span { padding: 0 5px; }
+    .section { padding: 75px 0; }
+    .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; margin-bottom: 30px; }
+    .section-heading h2, .final-cta h2 { font-size: clamp(40px, 10vw, 54px); }
+    .section-intro { font-size: 12px; }
+    .training-grid { grid-template-columns: 1fr 1fr; }
+    .training-card { min-height: 240px; padding: 17px; }
+    .training-card-wide { grid-column: span 2; min-height: 200px; }
+    .training-card h3 { font-size: 19px; }
+    .training-card p { font-size: 10px; }
+    .schedule-row { min-height: 72px; grid-template-columns: .75fr 1.4fr; gap: 10px; }
+    .schedule-day { font-size: 9px; }
+    .schedule-time { font-size: 21px; text-align: right; }
+    .schedule-duration { display: none; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card { padding: 28px 22px; }
+    .plan-card ul { min-height: auto; }
+    .final-cta { padding: 72px 5%; }
+    .site-footer { gap: 16px; }
+    .site-footer > p:not(.copyright) { order: 3; width: 100%; }
+    .back-to-top { font-size: 8px; }
+}
+
+/* 16) Respeta la preferencia del dispositivo por movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+}
+/* Tamaño del logo en celulares */
+@media (max-width: 650px) {
+    .brand-logo {
+        width: 50px;
+        height: 33px;
+    }
+}
+/* =========================================
+   CORRECCIONES PARA CELULARES
+   Evita que el contenido sobresalga a la derecha
+   ========================================= */
+
+/* Hace que los tamaños incluyan el padding y los bordes */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Evita el desbordamiento horizontal de la página */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Las imágenes nunca deben superar el ancho disponible */
+img {
+    max-width: 100%;
+}
+
+/* Ajustes específicos para celulares */
+@media (max-width: 650px) {
+
+    .site-header {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero,
+    .section,
+    .site-footer {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .hero-visual,
+    .training-grid,
+    .plans-grid,
+    .training-card,
+    .plan-card {
+        min-width: 0;
+    }
+
+    /* Permite que los textos largos bajen de línea */
+    .hero-description,
+    .section-intro,
+    .training-card p,
+    .plan-card li {
+        overflow-wrap: break-word;
+    }
+
+    /* Evita que los botones se salgan de la pantalla */
+    .button {
+        max-width: 100%;
+        white-space: normal;
+    }
+}
+
+/* Alinear los botones de WhatsApp e Instagram */
+.contact-buttons {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Ambos botones tendrán la misma altura */
+.contact-buttons .button {
+    min-height: 54px;
+    height: 54px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Evita que el texto del botón Instagram se desacomode */
+.instagram-button {
+    white-space: nowrap;
+}
+
+/* En celulares, se muestran uno debajo del otro */
+@media (max-width: 650px) {
+    .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-buttons .button {
+        width: 100%;
+        max-width: 320px;
+    }
+}
